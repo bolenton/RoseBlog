@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
 
+
 def post_list(request):
     posts = Post.objects.filter(published_date__isnull=False).order_by('published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
@@ -17,7 +18,6 @@ def post_detail(request, pk):
 @login_required
 def post_new(request):
     [...]
-
 
 def post_new(request):
     if request.method == "POST":
@@ -33,7 +33,7 @@ def post_new(request):
 
 
 @login_required
-def post_edit(request):
+def post_edit(request, pk):
     [...]
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -77,6 +77,7 @@ def publish(self):
 @login_required
 def post_remove(request):
     [...]
+
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
